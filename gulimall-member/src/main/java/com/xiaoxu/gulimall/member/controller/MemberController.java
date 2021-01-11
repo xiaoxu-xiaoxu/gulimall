@@ -1,10 +1,14 @@
 package com.xiaoxu.gulimall.member.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.xiaoxu.gulimall.member.feign.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +31,28 @@ import com.xiaoxu.gulimall.common.utils.R;
  */
 @RestController
 @RequestMapping("member/member")
+@RefreshScope
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private CouponService couponService;
+
+    @Value("${member.name}")
+    private String name;
+
+    @RequestMapping("/name")
+    public R getName(){
+        return R.ok().put("name", name);
+    }
+
+    @RequestMapping("/coupons")
+    public R coupons(){
+        R r = couponService.memberCoupon();
+        Object coupon = r.get("coupon");
+        return R.ok().put("coupon", coupon);
+    }
 
     /**
      * 列表

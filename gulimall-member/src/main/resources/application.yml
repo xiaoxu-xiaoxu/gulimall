@@ -2,11 +2,17 @@ server:
   port: 8003
 
 spring:
-  datasource:
-    url: jdbc:mysql://10.211.55.4:3306/gulimall_ums?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
+#  datasource:
+#    url: jdbc:mysql://10.211.55.4:3306/gulimall_ums?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+#    password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  application:
+    name: gulimall-member
 
 mybatis-plus:
   global-config:

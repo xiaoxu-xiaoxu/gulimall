@@ -1,5 +1,6 @@
 package com.xiaoxu.gulimall.coupon.controller;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -30,6 +31,14 @@ import com.xiaoxu.gulimall.common.utils.R;
 public class CouponController {
     @Autowired
     private CouponService couponService;
+
+    @RequestMapping("/member/coupons")
+    public R memberCoupon(){
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setAmount(new BigDecimal(23));
+        couponEntity.setCode("xiaoxu");
+        return R.ok().put("coupon", Arrays.asList(couponEntity));
+    }
 
     /**
      * 列表
