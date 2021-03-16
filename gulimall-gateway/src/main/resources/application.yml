@@ -18,3 +18,18 @@ spring:
           uri: https://www.jd.com
           predicates:
             - Query=url,you
+
+        - id: api-product
+          uri: lb:http://gulimall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), /$\{segment}
+
+        - id: api-route
+          uri: lb:http://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), /renren-fast$\{segment}
+

@@ -43,6 +43,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteByIds(List<Long> asList) {
+        this.removeByIds(asList);
+    }
+
     private List<CategoryEntity> getChildrens(CategoryEntity m, List<CategoryEntity> allCategories) {
         return allCategories
                 .stream()
